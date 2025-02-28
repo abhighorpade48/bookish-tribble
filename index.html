@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Daily Report</h1>
+
+        <label for="houseBird">Number of Birds in House:</label>
+        <input type="number" id="houseBird">
+
+        <label for="liveBird">Number of Live Birds:</label>
+        <input type="number" id="liveBird">
+
+        <label for="AWM">Average Weight (kg):</label>
+        <input type="number" step="0.01" id="AWM">
+
+        <label for="consumption">Enter Consumption (kg):</label>
+        <input type="number" id="consumption">
+
+        <button onclick="generateReport()">Generate Report</button>
+
+        <div id="report" class="report-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
