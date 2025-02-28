@@ -1,0 +1,51 @@
+<script>
+    function generateReport() {
+        const houseBird = parseFloat(document.getElementById('houseBird').value) || 0;
+        const liveBird = parseFloat(document.getElementById('liveBird').value) || 0;
+        const AWM = parseFloat(document.getElementById('AWM').value) || 0;
+        const consumption = parseFloat(document.getElementById('consumption').value) || 0;
+
+        if (houseBird === 0 || liveBird === 0 || AWM === 0) {
+            alert("⚠ Please enter valid values greater than zero.");
+            return;
+        }
+
+        const mortality = houseBird - liveBird;
+        const mortalityPercentage = ((mortality / houseBird) * 100).toFixed(2);
+        const totalAWM = (liveBird * AWM).toFixed(2);
+
+        // **Cost Calculation**
+        const feedCost = consumption * 42;
+        const adminCost = houseBird * 3;
+        const chicksCost = houseBird * 29;
+        const medicineCost = 16834.10;
+        const totalCost = feedCost + adminCost + chicksCost + medicineCost;
+
+        // **Cost per Kg**
+        const parKgCost = (liveBird * AWM) > 0 ? (totalCost / (liveBird * AWM)).toFixed(2) : 0;
+
+        // **Final Payment Calculation**
+        const GcFinal = ((85.16 - parKgCost) * 0.50 + 6.70).toFixed(2);
+        const payment = (liveBird * AWM * GcFinal).toFixed(2);
+
+        const reportDiv = document.getElementById('report');
+        const currentDate = new Date();
+        const dateString = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+        reportDiv.innerHTML = `
+            <h2>📄 Report Summary</h2>
+            <p><strong>Date:</strong> 📅 ${dateString}</p>
+            <p><strong>🏠 Birds in House:</strong> ${houseBird}</p>
+            <p><strong>💀 Mortality:</strong> ${mortality}</p>
+            <p><strong>📉 Mortality Percentage:</strong> ${mortalityPercentage}%</p>
+            <p><strong>⚖ Total Average Weight:</strong> ${totalAWM} kg</p>
+            <p><strong>💰 Feed Cost:</strong> ₹${feedCost.toFixed(2)}</p>
+            <p><strong>🏢 Admin Cost:</strong> ₹${adminCost.toFixed(2)}</p>
+            <p><strong>🐣 Chicks Cost:</strong> ₹${chicksCost.toFixed(2)}</p>
+            <p><strong>💊 Medicine Cost:</strong> ₹${medicineCost.toFixed(2)}</p>
+            <p><strong>💳 Total Cost:</strong> ₹${totalCost.toFixed(2)}</p>
+            <p><strong>📊 Cost per Kg:</strong> ₹${parKgCost}</p>
+            <p><strong>💵 Payment:</strong> ₹${payment}</p>
+        `;
+    }
+</script>
